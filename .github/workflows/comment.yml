@@ -1,15 +1,27 @@
-name: Commit Issue Commenter
-
+name: Create Comment
 on:
-  issue_comment:
-    types: [created]
+  push:
+    branches:
+      - github-action-wip-pr
 jobs:
-  commentCreated:
+  createComment:
     runs-on: ubuntu-latest
     steps:
-      - name: Add reaction
-        uses: peter-evans/create-or-update-comment@v1
+      - uses: actions/checkout@v2
+
+      # For debugging purposes. Remove this in production.
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Create comment
+        uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          comment-id: ${{ github.event.comment.id }}
-          reaction-type: eyes
+          issue-number: 1
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown**
+            - Created by [create-or-update-comment][1]
+            [1]: https://github.com/peter-evans/create-or-update-comment
