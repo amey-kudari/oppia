@@ -16,7 +16,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
       - name: Create comment
-        uses: ./
+        uses: peter-evans/create-or-update-comment@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: 1
