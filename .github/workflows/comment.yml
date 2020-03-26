@@ -1,6 +1,6 @@
 name: Create Comment
 on:
-  push:
+  pull_request:
     branches:
       - github-action-wip-pr
 jobs:
