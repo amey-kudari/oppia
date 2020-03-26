@@ -1,8 +1,8 @@
 name: Create Comment
 on:
-  pull_request:
-    types: [opened, reopened, edited]
-
+  push:
+    branches:
+      - github-action-wip-pr
 jobs:
   createComment:
     runs-on: ubuntu-latest
